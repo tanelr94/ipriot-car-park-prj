@@ -17,5 +17,9 @@ class TestDisplay(unittest.TestCase):
         self.display.update({"message": "Goodbye"})
         self.assertEqual(self.display.message, "Goodbye")
 
+    def test_register_raises_type_error(self):
+        with self.assertRaises(TypeError):
+            self.car_park.register("Not a Sensor or Display")
+
 if __name__ == "__main__":
     unittest.main()
