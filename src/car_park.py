@@ -16,3 +16,20 @@ class CarPark:
             raise TypeError("Object must be a Sensor or Display")
         if isinstance(component, Display):
             self.displays.append(component)
+
+    def add_car(self, plate):
+        self.plates.append(plate)
+        self.update_displays()
+
+    def remove_car(self, plate):
+        self.plates.remove(plate)
+        self.update_displays()
+
+    @property
+    def available_bays(self):
+        return max(0, self.capacity - len(self.plates))
+
+    def update_displays(self):
+        data = {"available_bays": self.available_bays, "temperature": 25}
+        for display in self.displays:
+            display.update(data)
